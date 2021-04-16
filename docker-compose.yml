@@ -1,0 +1,20 @@
+version: "3"
+services:
+  db-maria:
+    image: mariadb:10.5
+    environment:
+      MYSQL_DATABASE: devti
+      MYSQL_ROOT_PASSWORD: devti1234
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3306:3306
+
+  rest-api:
+    image: devti/api-server:latest
+#    image: 676381797150.dkr.ecr.ap-northeast-2.amazonaws.com/devti/api-server:latest
+    container_name: api-server
+    mem_limit: 512M
+    depends_on:
+      - db-maria
+    ports:
+      - 8090:8090
