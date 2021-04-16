@@ -13,7 +13,6 @@ services:
     image: devti/api-server:latest
 #    image: 676381797150.dkr.ecr.ap-northeast-2.amazonaws.com/devti/api-server:latest
     container_name: api-server
-    mem_limit: 512M
     depends_on:
       - db-maria
     ports:
