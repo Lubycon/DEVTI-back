@@ -2,6 +2,7 @@ package com.lubycon.devti.domain.user.api;
 
 
 import com.lubycon.devti.domain.user.dto.UserGetDto;
+import com.lubycon.devti.domain.user.dto.UserPostDto.UserPostReqDto;
 import com.lubycon.devti.domain.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +29,12 @@ public class UserController {
   @ApiOperation(value = "User 정보 조회")
   public ResponseEntity<UserGetDto> get(@PathVariable Long id) {
     return ResponseEntity.ok(userService.getUser(id));
+  }
+
+  @PostMapping
+  @ApiOperation(value = "User 생성")
+  public ResponseEntity<UserGetDto> create(@RequestBody UserPostReqDto userPostReqDto) {
+    return ResponseEntity.ok(userService.create(userPostReqDto));
   }
 
 }
