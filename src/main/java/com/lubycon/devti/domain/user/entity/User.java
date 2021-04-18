@@ -1,6 +1,7 @@
 package com.lubycon.devti.domain.user.entity;
 
 import com.lubycon.devti.domain.user.dto.UserGetDto;
+import com.lubycon.devti.global.annotation.PhoneNumber;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import com.lubycon.devti.global.util.ModelMapperUtils;
 import javax.persistence.Column;
@@ -37,6 +38,7 @@ public class User extends BaseTimeEntity {
 
   private Boolean newer;
 
+  @PhoneNumber
   @Column(nullable = false, unique = true)
   private String phone;
 
