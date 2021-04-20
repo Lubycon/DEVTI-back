@@ -37,7 +37,7 @@ name: DEVTI CI/CD
 
 jobs:
   build:
-    name: Build & Deploy
+    name: Build & Docker Image upload to ECR
     runs-on: ubuntu-latest
 
     steps:
