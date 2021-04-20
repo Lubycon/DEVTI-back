@@ -37,7 +37,7 @@ name: DEVTI CI/CD
 
 jobs:
   build:
-    name: Build
+    name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
