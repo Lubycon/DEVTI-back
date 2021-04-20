@@ -27,8 +27,9 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/devti?allowMultiQueries=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&passwordCharacterEncoding=UTF-8
 #    url: jdbc:mysql://db-maria:3306/devti?allowMultiQueries=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&passwordCharacterEncoding=UTF-8
-    username: devti
+    username: root
     password: devti1234
+    initialization-mode: always
 
 
 logging:
