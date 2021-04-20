@@ -52,24 +52,6 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: pwd
-      run: pwd
-    - name: ls -al
-      run: ls -al
-
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: pwd
-      run: pwd
-    - name: ls -al
-      run: ls -al
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        ref: stage
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
