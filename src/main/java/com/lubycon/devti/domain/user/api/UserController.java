@@ -28,7 +28,7 @@ public class UserController {
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "User 정보 조회")
   public ResponseEntity<UserGetDto> get(@PathVariable Long id) {
-    return ResponseEntity.ok(userService.getUser(id));
+    return ResponseEntity.ok(userService.getUserById(id));
   }
 
   @PostMapping

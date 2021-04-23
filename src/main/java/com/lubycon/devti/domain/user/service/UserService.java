@@ -20,7 +20,7 @@ public class UserService {
   private final ModelMapper modelMapper;
 
   @Transactional(readOnly = true)
-  public UserGetDto getUser(Long id) {
+  public UserGetDto getUserById(Long id) {
     User user = userRepository.findById(id)
         .orElseThrow(() -> new EntityNotFoundException(id.toString()));
 
