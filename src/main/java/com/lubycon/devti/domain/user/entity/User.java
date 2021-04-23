@@ -49,7 +49,7 @@ public class User extends BaseTimeEntity {
   private String phone;
 
   @JsonManagedReference
-  @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Survey> surveyList = new HashSet<>();
 
   public UserGetDto toDto() {
