@@ -45,7 +45,7 @@ public class User extends BaseTimeEntity {
   private Boolean newer;
 
   @PhoneNumber
-  @Column(nullable = false, unique = true)
+  @Column(unique = true)
   private String phone;
 
   @JsonManagedReference
