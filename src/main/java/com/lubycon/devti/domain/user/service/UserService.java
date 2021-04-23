@@ -28,6 +28,17 @@ public class UserService {
     return userGetDto;
   }
 
+  @Transactional(readOnly = true)
+  public UserGetDto getUserByEmail(String email) {
+    User user = userRepository.findByEmail(email);
+
+    if (user != null) {
+      UserGetDto userGetDto = user.toDto();
+      return userGetDto;
+    }
+    return null;
+  }
+
   @Transactional
   public UserGetDto create(UserPostReqDto userPostReqDto) {
     User user = User.builder()
