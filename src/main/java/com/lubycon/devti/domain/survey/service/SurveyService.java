@@ -5,7 +5,6 @@ import com.lubycon.devti.domain.survey.dto.SurveyPostDto.SurveyPostReqDto;
 import com.lubycon.devti.domain.survey.dto.SurveyPostDto.SurveyPostResDto;
 import com.lubycon.devti.domain.survey.entity.Survey;
 import com.lubycon.devti.domain.user.dao.UserRepository;
-import com.lubycon.devti.domain.user.dto.UserGetDto;
 import com.lubycon.devti.domain.user.entity.User;
 import com.lubycon.devti.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,7 @@ public class SurveyService {
 
   @Transactional
   public SurveyPostResDto createSurvey(SurveyPostReqDto surveyPostReqDto) {
-    UserGetDto userGetDto = userService.getUserByEmail(surveyPostReqDto.getEmail());
-    if (userGetDto == null) {
+    if (userService.existsUser(surveyPostReqDto.getEmail())) {
       User user = User.builder()
           .email(surveyPostReqDto.getEmail())
           .build();
@@ -47,4 +45,5 @@ public class SurveyService {
 
     return null;
   }
+
 }

@@ -49,4 +49,9 @@ public class UserService {
     return modelMapper.map(savedUser, UserGetDto.class);
   }
 
+  public boolean existsUser(String email) {
+    UserGetDto userGetDto = getUserByEmail(email);
+    return userGetDto == null;
+  }
+
 }
