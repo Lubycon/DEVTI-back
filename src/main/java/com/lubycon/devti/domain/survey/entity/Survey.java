@@ -1,6 +1,5 @@
 package com.lubycon.devti.domain.survey.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.lubycon.devti.domain.user.entity.User;
 import com.lubycon.devti.global.code.SurveyType;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
@@ -38,7 +37,6 @@ public class Survey extends BaseTimeEntity {
   @Column(nullable = false)
   private SurveyType surveyType;
 
-  @JsonBackReference
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
