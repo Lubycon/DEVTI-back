@@ -40,7 +40,7 @@ public class User extends BaseTimeEntity {
   @Column(length = 100, unique = true)
   private String email;
 
-  private Boolean newer;
+  private boolean newer;
 
   @PhoneNumber
   @Column(nullable = false, unique = true)
