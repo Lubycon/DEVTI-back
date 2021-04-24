@@ -39,7 +39,6 @@ public class UserService {
     return null;
   }
 
-  @Transactional
   public UserGetDto create(UserPostReqDto userPostReqDto) {
     User user = User.builder()
         .name(userPostReqDto.getName())
