@@ -20,7 +20,7 @@ public class UserService {
   private final ModelMapper modelMapper;
 
   @Transactional(readOnly = true)
-  public UserGetDto getUser(Long id) {
+  public UserGetDto getUserById(Long id) {
     User user = userRepository.findById(id)
         .orElseThrow(() -> new EntityNotFoundException(id.toString()));
 
@@ -28,7 +28,17 @@ public class UserService {
     return userGetDto;
   }
 
-  @Transactional
+  @Transactional(readOnly = true)
+  public UserGetDto getUserByEmail(String email) {
+    User user = userRepository.findByEmail(email);
+
+    if (user != null) {
+      UserGetDto userGetDto = user.toDto();
+      return userGetDto;
+    }
+    return null;
+  }
+
   public UserGetDto create(UserPostReqDto userPostReqDto) {
     User user = User.builder()
         .name(userPostReqDto.getName())
@@ -37,6 +47,11 @@ public class UserService {
         .build();
     User savedUser = userRepository.save(user);
     return modelMapper.map(savedUser, UserGetDto.class);
+  }
+
+  public boolean existsUser(String email) {
+    UserGetDto userGetDto = getUserByEmail(email);
+    return userGetDto == null;
   }
 
 }

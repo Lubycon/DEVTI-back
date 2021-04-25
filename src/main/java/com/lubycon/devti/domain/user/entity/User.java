@@ -1,20 +1,14 @@
 package com.lubycon.devti.domain.user.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.lubycon.devti.domain.survey.entity.Survey;
 import com.lubycon.devti.domain.user.dto.UserGetDto;
 import com.lubycon.devti.global.annotation.PhoneNumber;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import com.lubycon.devti.global.util.ModelMapperUtils;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,12 +37,8 @@ public class User extends BaseTimeEntity {
   private boolean newer;
 
   @PhoneNumber
-  @Column(nullable = false, unique = true)
+  @Column(unique = true)
   private String phone;
-
-  @JsonManagedReference
-  @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Survey> surveyList = new HashSet<>();
 
   public UserGetDto toDto() {
     return ModelMapperUtils.getInstance().map(this, UserGetDto.class);
