@@ -1,18 +1,15 @@
 package com.lubycon.devti.domain.survey.entity;
 
-import com.lubycon.devti.domain.user.entity.User;
 import com.lubycon.devti.global.code.SurveyType;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,8 +34,7 @@ public class Survey extends BaseTimeEntity {
   @Column(nullable = false)
   private SurveyType surveyType;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  private User user;
-
+  @Email
+  @Column(length = 100, unique = true)
+  private String email;
 }

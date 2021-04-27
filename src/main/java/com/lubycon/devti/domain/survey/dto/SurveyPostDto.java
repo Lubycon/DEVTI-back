@@ -1,6 +1,5 @@
 package com.lubycon.devti.domain.survey.dto;
 
-import com.lubycon.devti.domain.user.dto.UserGetDto;
 import com.lubycon.devti.global.code.SurveyType;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotBlank;
@@ -41,7 +40,7 @@ public class SurveyPostDto {
 
     private Long id;
     private String comment;
-    private UserGetDto userGetDto;
+    private String email;
 
   }
 
