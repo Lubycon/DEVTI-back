@@ -24,7 +24,7 @@ public class SurveyPostDto {
     @ApiModelProperty(value = "이메일", example = "abc@devti.com")
     private String email;
 
-    @ApiModelProperty(value = "휴대폰 번", example = "010-9594-8215")
+    @ApiModelProperty(value = "휴대폰 번호", example = "010-9594-8215")
     private String phone;
   }
 
