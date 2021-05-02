@@ -1,7 +1,6 @@
 package com.lubycon.devti.global.error;
 
 import com.lubycon.devti.global.error.exception.BusinessException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @ControllerAdvice("com.lubycon.devti.domain")
-@Slf4j
-public class GlobalExceptionHandler {
+publi
+
+class GlobalExceptionHandler {
 
   /**
    * javax.validation.Valid or @Validated 으로 binding error 발생시 발생한다. HttpMessageConverter 에서 등록한
