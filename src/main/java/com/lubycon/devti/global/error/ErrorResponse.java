@@ -19,13 +19,10 @@ public class ErrorResponse {
   private String detailMessage;
   private List<FieldError> errors;
   private String message;
-  private int status;
-
 
   private ErrorResponse(final ErrorCode code, final List<FieldError> errors) {
     this.message = code.getMessage();
     this.detailMessage = "";
-    this.status = code.getStatus();
     this.errors = errors;
     this.code = code.getCode();
   }
@@ -33,7 +30,6 @@ public class ErrorResponse {
   private ErrorResponse(final ErrorCode code) {
     this.message = code.getMessage();
     this.detailMessage = "";
-    this.status = code.getStatus();
     this.code = code.getCode();
     this.errors = new ArrayList<>(); // empty list
   }
@@ -41,7 +37,6 @@ public class ErrorResponse {
   private ErrorResponse(final ErrorCode code, @NonNull final String detailMessage) {
     this.message = code.getMessage();
     this.detailMessage = detailMessage;
-    this.status = code.getStatus();
     this.code = code.getCode();
     this.errors = new ArrayList<>(); // empty list
   }
