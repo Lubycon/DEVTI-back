@@ -31,7 +31,7 @@ public class BucketTestType extends BaseTimeEntity {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "phrases")
+  @Column(name = "phrases", nullable = false)
   private String phrases;
 
   @Builder
