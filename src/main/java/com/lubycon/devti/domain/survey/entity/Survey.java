@@ -37,4 +37,7 @@ public class Survey extends BaseTimeEntity {
   @Email
   @Column(length = 100, unique = true)
   private String email;
+
+  @Column(length = 50, unique = true)
+  private String phone;
 }

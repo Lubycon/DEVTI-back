@@ -1,7 +1,7 @@
 INSERT INTO survey (created_at, updated_at, comment, email, survey_type) VALUES (now(), now(), 'FE,BE? ', 'user1@devti.com', 'DEVTI');
 INSERT INTO survey (created_at, updated_at, comment, email, survey_type) VALUES (now(), now(), 'FE,BE? ', 'user2@devti.com', 'DEVTI');
-INSERT INTO survey (created_at, updated_at, comment, email, survey_type) VALUES (now(), now(), 'FE,BE? ', 'user3@devti.com', 'DEVTI');
-INSERT INTO survey (created_at, updated_at, comment, email, survey_type) VALUES (now(), now(), 'FE,BE? ', 'user4@devti.com', 'DEVTI');
+INSERT into survey (created_at, updated_at, comment, phone, survey_type) values (now(), now(), 'FE,BE? ', '010-1111-2222', 'DEVTI');
+INSERT into survey (created_at, updated_at, comment, phone, survey_type) values (now(), now(), 'FE,BE? ', '010-3333-4444', 'DEVTI');
 
 INSERT INTO bucket_test_type(created_at, updated_at, description, phrases, test_type) VALUES(now(), now(), "완전 현직 개발자 type", "나에게 딱 맞는 개발자 직군을 찾아보세요", 'TYPE_COMMON_1');
 INSERT INTO bucket_test_type(created_at, updated_at, description, phrases, test_type) VALUES(now(), now(), "개발자 준비 중 취업러 type", "지금, 어떤 직군에 지원해야 하는지 고민이 된다면?", 'TYPE_COMMON_2');
