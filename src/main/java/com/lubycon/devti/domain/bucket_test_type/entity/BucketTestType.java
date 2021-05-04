@@ -9,13 +9,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BucketTestType extends BaseTimeEntity {
 
   @Id
@@ -30,7 +31,7 @@ public class BucketTestType extends BaseTimeEntity {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "phrases")
+  @Column(name = "phrases", nullable = false)
   private String phrases;
 
   @Builder
