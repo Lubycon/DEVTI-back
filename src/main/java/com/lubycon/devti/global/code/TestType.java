@@ -11,6 +11,7 @@ public enum TestType implements DevtiEnumerable {
   ;
 
   private final int value;
+  private static TestType[] testTypes = values();
 
   @Override
   public int getValue() {
@@ -20,6 +21,13 @@ public enum TestType implements DevtiEnumerable {
   @Override
   public String getKey() {
     return name();
+  }
+
+  public TestType getNext() {
+    if ((this.ordinal() + 1) % testTypes.length == testTypes.length - 1) {
+      return testTypes[0];
+    }
+    return testTypes[(this.ordinal() + 1) % testTypes.length];
   }
 
 }
