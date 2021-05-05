@@ -18,8 +18,8 @@ public class TrafficService {
   public Traffic getLastTraffic() {
     Optional<Traffic> lastTraffic = trafficRepository.findTopByOrderByIdDesc();
 
-    return lastTraffic.orElse(
-        Traffic.builder()
+    return lastTraffic.orElseGet(
+        () -> Traffic.builder()
             .testType(TestType.TYPE_COMMON_3)
             .build());
   }
