@@ -1,6 +1,5 @@
-package com.lubycon.devti.domain.survey.entity;
+package com.lubycon.devti.domain.bucket_test_type.entity;
 
-import com.lubycon.devti.global.code.SurveyType;
 import com.lubycon.devti.global.code.TestType;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import javax.persistence.Column;
@@ -11,37 +10,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Survey extends BaseTimeEntity {
+public class BucketTestType extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "survey_id")
+  @Column(name = "BUCKET_TEST_TYPE_ID")
   private Long id;
 
-  @Column(length = 500)
-  private String comment;
-
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  private SurveyType surveyType;
-
-  @Column(length = 100, unique = true)
-  private String email;
-
-  @Column(length = 50, unique = true)
-  private String phone;
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "test_type", nullable = false)
+  @Column(name = "test_type", nullable = false, insertable = false, updatable = false)
   private TestType testType;
+
+  @Column(name = "description")
+  private String description;
+
+  @Column(name = "phrases", nullable = false)
+  private String phrases;
+
+  @Builder
+  public BucketTestType(TestType testType, String description, String phrases) {
+    this.testType = testType;
+    this.description = description;
+    this.phrases = phrases;
+  }
 }
