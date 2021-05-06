@@ -3,9 +3,9 @@ package com.lubycon.devti.domain.survey.dto;
 import com.lubycon.devti.global.code.SurveyType;
 import com.lubycon.devti.global.code.TestType;
 import io.swagger.annotations.ApiModelProperty;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,16 +20,19 @@ public class SurveyPostDto {
     @ApiModelProperty(value = "사전 참여 조사 타입(현재는 DEVTI만 존재)", example = "DEVTI")
     private SurveyType surveyType;
 
+    @Nullable
     @ApiModelProperty(value = "사전 참여 조사 comment", example = "FE, BE그것이 문제로다")
     private String comment;
 
+    @Nullable
     @ApiModelProperty(value = "이메일", example = "abc@devti.com")
     private String email;
 
+    @Nullable
     @ApiModelProperty(value = "휴대폰 번호", example = "010-9594-8215")
     private String phone;
 
-    @Enumerated(EnumType.STRING)
+    @NotNull
     @ApiModelProperty(value = "Bucket test type", example = "TYPE_COMMON_1")
     private TestType testType;
   }
@@ -52,7 +55,6 @@ public class SurveyPostDto {
       this.phone = phone;
       this.testType = testType;
     }
-
   }
 
 }
