@@ -6,7 +6,6 @@ import com.lubycon.devti.domain.survey.dto.SurveyPostDto.SurveyPostResDto;
 import com.lubycon.devti.domain.survey.entity.Survey;
 import com.lubycon.devti.global.error.ErrorCode;
 import com.lubycon.devti.global.error.exception.InvalidValueException;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,18 +20,11 @@ public class SurveyService {
 
   @Transactional
   public SurveyPostResDto createSurvey(SurveyPostReqDto surveyPostReqDto) {
-    Optional<Survey> checkSurvey = null;
 
-    if (null != surveyPostReqDto.getPhone()) {
-      checkSurvey = surveyRepository.findByPhone(surveyPostReqDto.getPhone());
-      if (checkSurvey.isPresent()) {
-        throw new InvalidValueException(surveyPostReqDto.getEmail(), ErrorCode.PHONE_DUPLICATION);
-      }
+    if (isFilledWithPhoneSurvey(surveyPostReqDto)) {
+      checkDuplicatedSurveyByPhone(surveyPostReqDto.getPhone());
     } else {
-      checkSurvey = surveyRepository.findByEmail(surveyPostReqDto.getEmail());
-      if (checkSurvey.isPresent()) {
-        throw new InvalidValueException(surveyPostReqDto.getEmail(), ErrorCode.EMAIL_DUPLICATION);
-      }
+      checkDuplicatedSurveyByEmail(surveyPostReqDto.getEmail());
     }
 
     Survey survey = Survey.builder()
@@ -52,6 +44,21 @@ public class SurveyService {
         .phone(savedSurvey.getPhone())
         .testType(savedSurvey.getTestType())
         .build();
+  }
 
+  public boolean isFilledWithPhoneSurvey(SurveyPostReqDto surveyPostReqDto) {
+    return surveyPostReqDto.getPhone() != null;
+  }
+
+  public void checkDuplicatedSurveyByPhone(String phone) {
+    if (surveyRepository.findByPhone(phone).isPresent()) {
+      throw new InvalidValueException(phone, ErrorCode.PHONE_DUPLICATION);
+    }
+  }
+
+  public void checkDuplicatedSurveyByEmail(String email) {
+    if (surveyRepository.findByEmail(email).isPresent()) {
+      throw new InvalidValueException(email, ErrorCode.EMAIL_DUPLICATION);
+    }
   }
 }
