@@ -22,7 +22,7 @@ public enum ErrorCode {
 
   // Survey
   EMAIL_DUPLICATION(400, "S001", "Email is Duplication"),
-  PHONE_DUPLICATION(400, "S002", "Phone input is invalid"),
+  PHONE_DUPLICATION(400, "S002", "Phone is Duplication"),
   ;
 
   private final String code;
