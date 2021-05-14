@@ -6,8 +6,10 @@ import com.lubycon.devti.domain.survey.dto.SurveyPostDto.SurveyPostResDto;
 import com.lubycon.devti.domain.survey.entity.Survey;
 import com.lubycon.devti.global.error.ErrorCode;
 import com.lubycon.devti.global.error.exception.InvalidValueException;
+import com.lubycon.devti.global.util.SlackPusher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SurveyService {
 
+  @Value("${constant.slack.survey-monitoring-channel-url}")
+  private String slackSurveyMonitoringChannelUrl;
+  @Value("${constant.slack.survey-monitoring-channel-name}")
+  private String slackSurveyMonitoringChannelName;
   private final SurveyRepository surveyRepository;
+
 
   @Transactional
   public SurveyPostResDto createSurvey(SurveyPostReqDto surveyPostReqDto) {
@@ -36,6 +43,8 @@ public class SurveyService {
         .build();
 
     Survey savedSurvey = surveyRepository.save(survey);
+
+    pushMessage(savedSurvey);
 
     return SurveyPostResDto.builder()
         .id(savedSurvey.getId())
@@ -60,5 +69,17 @@ public class SurveyService {
     if (surveyRepository.findByEmail(email).isPresent()) {
       throw new InvalidValueException(email, ErrorCode.EMAIL_DUPLICATION);
     }
+  }
+
+  private void pushMessage(Survey registeredSurvey) {
+    SlackPusher slackPusher = new SlackPusher(
+        slackSurveyMonitoringChannelUrl,
+        "#" + slackSurveyMonitoringChannelName);
+
+    slackPusher.pushMessage(
+        "*신규 사전 참여 신청이 들어왔습니다!*"
+            + "\n- Comment : " + registeredSurvey.getComment()
+            + "\n- Test Type: " + registeredSurvey.getTestType()
+    );
   }
 }
