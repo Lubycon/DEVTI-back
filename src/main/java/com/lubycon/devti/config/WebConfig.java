@@ -2,6 +2,7 @@ package com.lubycon.devti.config;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -11,6 +12,12 @@ public class WebConfig implements WebMvcConfigurer {
   @Override
   public void addCorsMappings(final CorsRegistry registry) {
     registry.addMapping("/**")
-        .allowedOrigins("http://localhost:3000", "https://devti.kr");
+        .allowedOrigins("http://localhost:3000", "https://www.devti.kr")
+        .allowedMethods(
+            HttpMethod.GET.name(),
+            HttpMethod.HEAD.name(),
+            HttpMethod.POST.name(),
+            HttpMethod.PUT.name(),
+            HttpMethod.DELETE.name());
   }
 }
