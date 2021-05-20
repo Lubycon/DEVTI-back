@@ -1,7 +1,7 @@
 package com.lubycon.devti.domain.question.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.lubycon.devti.domain.option.entity.Option;
+import com.lubycon.devti.domain.preset.entity.Preset;
 import com.lubycon.devti.global.code.AnswerType;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import java.util.HashSet;
@@ -40,6 +40,6 @@ public class Question extends BaseTimeEntity {
   private AnswerType answerType;
 
   @JsonManagedReference
-  @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Option> options = new HashSet<>();
+  @OneToMany(mappedBy = "preset", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Preset> presets = new HashSet<>();
 }
