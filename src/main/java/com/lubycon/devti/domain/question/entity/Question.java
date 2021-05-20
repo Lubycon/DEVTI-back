@@ -2,12 +2,15 @@ package com.lubycon.devti.domain.question.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lubycon.devti.domain.option.entity.Option;
+import com.lubycon.devti.global.code.AnswerType;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +35,11 @@ public class Question extends BaseTimeEntity {
   @Column(length = 100)
   private String title;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "answer_type", nullable = false)
+  private AnswerType answerType;
+
   @JsonManagedReference
   @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Option> optionList = new HashSet<>();
+  private Set<Option> options = new HashSet<>();
 }
