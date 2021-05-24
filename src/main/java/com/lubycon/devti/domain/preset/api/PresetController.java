@@ -1,7 +1,7 @@
-package com.lubycon.devti.domain.option.api;
+package com.lubycon.devti.domain.preset.api;
 
 
-import com.lubycon.devti.domain.option.service.OptionService;
+import com.lubycon.devti.domain.preset.service.PresetService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/option")
+@RequestMapping("/preset")
 @RequiredArgsConstructor
-@Api(value = "Option")
-public class OptionController {
+@Api(value = "Preset")
+public class PresetController {
 
-  private final OptionService optionService;
+  private final PresetService presetService;
 
 
 }

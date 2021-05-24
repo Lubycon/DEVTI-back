@@ -1,4 +1,4 @@
-package com.lubycon.devti.domain.option.entity;
+package com.lubycon.devti.domain.preset.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.lubycon.devti.domain.question.entity.Question;
@@ -21,11 +21,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Option extends BaseTimeEntity {
+public class Preset extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "OPTION_ID")
+  @Column(name = "preset_id")
   private Long id;
 
   @JsonBackReference
@@ -34,5 +34,5 @@ public class Option extends BaseTimeEntity {
   private Question question;
 
   @Column(length = 100)
-  private String option;
+  private String preset;
 }
