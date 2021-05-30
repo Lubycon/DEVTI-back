@@ -1,8 +1,10 @@
 package com.lubycon.devti.domain.preset.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.lubycon.devti.domain.preset.dto.PresetResDto;
 import com.lubycon.devti.domain.question.entity.Question;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
+import com.lubycon.devti.global.util.ModelMapperUtils;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,4 +37,8 @@ public class Preset extends BaseTimeEntity {
 
   @Column(length = 100)
   private String label;
+
+  public PresetResDto toDto() {
+    return ModelMapperUtils.getInstance().map(this, PresetResDto.class);
+  }
 }
