@@ -25,13 +25,13 @@ public class PresetService {
     }
 
     List<PresetResDto> presetResDtos = new ArrayList<>(presets.size());
-    for (Preset preset : presets) {
+    presets.stream().forEach((preset) -> {
       presetResDtos.add(PresetResDto.builder()
           .id(preset.getId())
           .label(preset.getLabel())
           .build());
-    }
-
+    });
+    
     return presetResDtos;
   }
 }
