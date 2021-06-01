@@ -1,15 +1,15 @@
 package com.lubycon.devti.domain.preset.dto;
 
 
-import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class PresetResDto {
 
   @NotNull
-  private Long id;
+  private long id;
   private String label;
 
   @Builder
