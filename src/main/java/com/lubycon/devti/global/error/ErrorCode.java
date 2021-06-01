@@ -23,7 +23,9 @@ public enum ErrorCode {
   // Survey
   EMAIL_DUPLICATION(400, "S001", "Email is Duplication"),
   PHONE_DUPLICATION(400, "S002", "Phone is Duplication"),
-  ;
+
+  // Preset
+  PRESET_NOT_FOUND(400, "P001", "Preset not found");
 
   private final String code;
   private final String message;

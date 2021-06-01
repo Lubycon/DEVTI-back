@@ -34,5 +34,5 @@ public class Preset extends BaseTimeEntity {
   private Question question;
 
   @Column(length = 100)
-  private String preset;
+  private String label;
 }
