@@ -4,8 +4,8 @@ import com.lubycon.devti.domain.advertisement.dao.AdvertisementRepository;
 import com.lubycon.devti.domain.advertisement.dto.AdvertisementResDto;
 import com.lubycon.devti.domain.advertisement.entity.Advertisement;
 import com.lubycon.devti.global.code.AdvertisementType;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +19,11 @@ public class AdvertisementService {
       AdvertisementType advertisementType) {
     List<Advertisement> advertisements = advertisementRepository
         .findAllByAdvertisementType(advertisementType);
+    
+    List<AdvertisementResDto> advertisementResDtos = advertisements.stream()
+        .map(AdvertisementResDto::convertResponseDto)
+        .collect(Collectors.toList());
 
-    List<AdvertisementResDto> advertisementResDtos = new ArrayList<>(advertisements.size());
-    advertisements.stream().forEach((advertisement) -> {
-      advertisementResDtos.add(AdvertisementResDto.convertResponseDto(advertisement));
-    });
     return advertisementResDtos;
   }
 }

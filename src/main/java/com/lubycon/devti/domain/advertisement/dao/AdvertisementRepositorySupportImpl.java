@@ -13,7 +13,7 @@ public class AdvertisementRepositorySupportImpl
     extends QuerydslRepositorySupport implements AdvertisementRepositorySupport {
 
   private final JPAQueryFactory queryFactory;
-  QAdvertisement advertisement = QAdvertisement.advertisement;
+  private final QAdvertisement advertisement = QAdvertisement.advertisement;
 
   public AdvertisementRepositorySupportImpl(final JPAQueryFactory queryFactory) {
 
