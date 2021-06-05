@@ -9,12 +9,12 @@ import org.jetbrains.annotations.NotNull;
 public class PresetResDto {
 
   @NotNull
-  private long id;
+  private long key;
   private String label;
 
   @Builder
-  public PresetResDto(Long id, String label) {
-    this.id = id;
+  public PresetResDto(Long key, String label) {
+    this.key = key;
     this.label = label;
   }
 }

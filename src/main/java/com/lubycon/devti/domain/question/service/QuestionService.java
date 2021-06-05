@@ -29,11 +29,8 @@ public class QuestionService {
   }
 
   private QuestionsResDto setQuestionResDto(Question question) {
-    
-    if (QuestionsResDto.isPresetAnswerType(question)) {
-      return QuestionsResDto.convertResponseDto(question,
-          presetService.findAllPresetByQuestionId(question.getId()));
-    }
-    return QuestionsResDto.convertResponseDto(question);
+
+    return QuestionsResDto
+        .convertResponseDto(question, presetService.findAllPresetByQuestionId(question.getId()));
   }
 }

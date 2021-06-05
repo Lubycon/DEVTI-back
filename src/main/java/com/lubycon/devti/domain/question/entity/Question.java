@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lubycon.devti.domain.preset.entity.Preset;
 import com.lubycon.devti.domain.question.dto.QuestionResDto;
 import com.lubycon.devti.global.code.AnswerType;
+import com.lubycon.devti.global.code.Pillar;
 import com.lubycon.devti.global.entity.BaseTimeEntity;
 import com.lubycon.devti.global.util.ModelMapperUtils;
 import java.util.HashSet;
@@ -34,9 +35,13 @@ public class Question extends BaseTimeEntity {
   @Column(name = "QUESTION_ID")
   private Long id;
 
-  @Column(length = 100)
+  @Column(name = "title", nullable = false, length = 100)
   private String title;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "pillar", nullable = false)
+  private Pillar pillar;
+  
   @Enumerated(EnumType.STRING)
   @Column(name = "answer_type", nullable = false)
   private AnswerType answerType;

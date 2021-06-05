@@ -35,18 +35,4 @@ public class QuestionsResDto {
         .presets(presetResDtoList)
         .build();
   }
-
-  public static QuestionsResDto convertResponseDto(Question question) {
-    return QuestionsResDto.builder()
-        .id(question.getId())
-        .title(question.getTitle())
-        .answerType(question.getAnswerType())
-        .build();
-  }
-
-
-  public static boolean isPresetAnswerType(Question question) {
-
-    return question.getAnswerType().equals(AnswerType.PRESET);
-  }
 }
