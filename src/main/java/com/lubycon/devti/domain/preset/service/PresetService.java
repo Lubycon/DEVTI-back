@@ -7,7 +7,6 @@ import com.lubycon.devti.global.error.ErrorCode;
 import com.lubycon.devti.global.error.exception.BusinessException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,11 +25,13 @@ public class PresetService {
     }
 
     List<PresetResDto> presetResDtos = new ArrayList<>(presets.size());
-    AtomicLong index = new AtomicLong();
 
     presets.stream().forEach((preset) -> {
       presetResDtos.add(PresetResDto.builder()
           .key(preset.getSequence())
+          .bias(preset.getBias())
+          .weight(preset.getWeight())
+          .sequence(preset.getSequence())
           .label(preset.getLabel())
           .build());
     });
