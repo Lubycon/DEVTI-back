@@ -26,6 +26,7 @@ public class AnswerController {
   @ApiOperation(value = "답변 저장하여 결과값 반환 받기")
   public ResponseEntity<Answer> create(
       @RequestBody List<AnswerAttribute> answerAttributeList) {
+    
     return ResponseEntity
         .ok(answerService.createAnswer(answerAttributeList));
   }
