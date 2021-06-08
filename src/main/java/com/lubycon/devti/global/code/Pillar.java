@@ -1,25 +1,18 @@
 package com.lubycon.devti.global.code;
 
-import lombok.RequiredArgsConstructor;
+import java.util.Arrays;
+import java.util.List;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
-public enum Pillar implements DevtiEnumerable {
-  ROLE(0),
-  SCALE(1),
-  INTEREST(2),
-  PRIORITY(3),
+@NoArgsConstructor
+public enum Pillar {
+  ROLE("직군", Arrays.asList("F", "B")),
+  SCALE("규모", Arrays.asList("S", "C")),
+  INTEREST("관심사", Arrays.asList("P", "T")),
+  PRIORITY("우선순위", Arrays.asList("W", "L")),
   ;
 
-  private final int value;
 
-  @Override
-  public int getValue() {
-    return value;
+  Pillar(String pillar, List<String> biasList) {
   }
-
-  @Override
-  public String getKey() {
-    return name();
-  }
-
 }
