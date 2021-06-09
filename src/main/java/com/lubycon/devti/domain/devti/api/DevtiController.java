@@ -1,9 +1,9 @@
-package com.lubycon.devti.domain.answer.api;
+package com.lubycon.devti.domain.devti.api;
 
 
 import com.lubycon.devti.domain.answer.entity.Answer;
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute;
-import com.lubycon.devti.domain.answer.service.AnswerService;
+import com.lubycon.devti.domain.devti.service.DevtiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -15,20 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/answer")
+@RequestMapping("/devti")
 @RequiredArgsConstructor
-@Api(value = "Answer")
-public class AnswerController {
+@Api(value = "Devti")
+public class DevtiController {
 
-  private final AnswerService answerService;
+  private final DevtiService devtiService;
 
   @PostMapping
   @ApiOperation(value = "답변 저장하여 결과값 반환 받기")
-  public ResponseEntity<Answer> create(
+  public ResponseEntity<Answer> getDevtiByAnswer(
       @RequestBody List<AnswerAttribute> answerAttributeList) {
-    
-    return ResponseEntity
-        .ok(answerService.createAnswer(answerAttributeList));
+    devtiService.getDevtiByAnswer(answerAttributeList);
+    return null;
+//    return ResponseEntity
+//        .ok();
   }
 }
  
