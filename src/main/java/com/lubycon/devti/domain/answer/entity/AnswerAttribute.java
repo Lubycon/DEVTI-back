@@ -20,7 +20,7 @@ public class AnswerAttribute {
 
   @Builder
   public AnswerAttribute(long id, AnswerType answerType, long sequence,
-      Bias bias, @Min(0) long weight) {
+      Bias bias, @Min(0) float weight) {
     this.id = id;
     this.answerType = answerType;
     this.sequence = sequence;

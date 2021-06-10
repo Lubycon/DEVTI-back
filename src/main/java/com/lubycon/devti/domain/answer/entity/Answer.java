@@ -31,7 +31,7 @@ public class Answer extends BaseTimeEntity {
   private List<AnswerAttribute> answerList;
 
   @Builder
-  private Answer(Long id, List<AnswerAttribute> answerList) {
+  public Answer(Long id, List<AnswerAttribute> answerList) {
     this.id = id;
     this.answerList = answerList;
   }
