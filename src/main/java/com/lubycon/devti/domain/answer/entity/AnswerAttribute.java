@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnswerAttribute {
 
-  long id;
-  AnswerType answerType;
-  long sequence;
-  Bias bias;
+  private long id;
+  private AnswerType answerType;
+  private long sequence;
+  private Bias bias;
   @Min(0)
-  float weight;
+  private float weight;
 
   @Builder
   public AnswerAttribute(long id, AnswerType answerType, long sequence,
