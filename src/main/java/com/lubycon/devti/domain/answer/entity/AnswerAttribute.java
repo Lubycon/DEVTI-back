@@ -1,6 +1,7 @@
 package com.lubycon.devti.domain.answer.entity;
 
 import com.lubycon.devti.global.code.AnswerType;
+import com.lubycon.devti.global.code.Bias;
 import javax.validation.constraints.Min;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,16 +11,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnswerAttribute {
 
-  long id;
-  AnswerType answerType;
+  private long id;
+  private AnswerType answerType;
+  private long sequence;
+  private Bias bias;
   @Min(0)
-  long value;
+  private float weight;
 
   @Builder
-  public AnswerAttribute(long id, AnswerType answerType, long value) {
+  public AnswerAttribute(long id, AnswerType answerType, long sequence,
+      Bias bias, @Min(0) float weight) {
     this.id = id;
     this.answerType = answerType;
-    this.value = value;
+    this.sequence = sequence;
+    this.bias = bias;
+    this.weight = weight;
   }
-
 }

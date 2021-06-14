@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Answer extends BaseTimeEntity {
   @Column(name = "answer_id")
   private Long id;
 
+  @Lob
   @Convert(converter = AnswerAttributeConverter.class)
   @Column(name = "answer_list", nullable = false)
   private List<AnswerAttribute> answerList;
