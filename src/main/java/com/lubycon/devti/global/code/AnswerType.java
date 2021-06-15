@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 public enum AnswerType implements DevtiEnumerable {
   PRESET(0),
   GAGE(1),
+  JOB(2),
+  YEARS(3),
   ;
 
   private final int value;
