@@ -1,8 +1,8 @@
 package com.lubycon.devti.domain.devti.api;
 
 
-import com.lubycon.devti.domain.answer.entity.Answer;
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute;
+import com.lubycon.devti.domain.devti.dto.DevtiResDto;
 import com.lubycon.devti.domain.devti.service.DevtiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,12 +24,9 @@ public class DevtiController {
 
   @PostMapping
   @ApiOperation(value = "답변 저장하여 결과값 반환 받기")
-  public ResponseEntity<Answer> getDevtiByAnswer(
+  public ResponseEntity<DevtiResDto> getDevtiByAnswer(
       @RequestBody List<AnswerAttribute> answerAttributeList) {
-    devtiService.getDevtiByAnswer(answerAttributeList);
-    return null;
-//    return ResponseEntity
-//        .ok();
+    return ResponseEntity.ok(devtiService.getMockResultResponse());
   }
 }
  
