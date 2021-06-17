@@ -17,7 +17,6 @@ public class BiasResult {
   @ApiModelProperty(value = "Bias 정보")
   private Bias bias;
 
-  @NotNull
   @Min(0)
   @Max(100)
   @ApiModelProperty(value = "Bias percent", example = "10")
