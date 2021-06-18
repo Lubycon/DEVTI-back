@@ -19,11 +19,15 @@ public class AdvertisementService {
       AdvertisementType advertisementType) {
     List<Advertisement> advertisements = advertisementRepository
         .findAllByAdvertisementType(advertisementType);
-    
+
     List<AdvertisementResDto> advertisementResDtos = advertisements.stream()
         .map(AdvertisementResDto::convertResponseDto)
         .collect(Collectors.toList());
 
     return advertisementResDtos;
+  }
+
+  public List<Advertisement> findAll() {
+    return advertisementRepository.findAll();
   }
 }

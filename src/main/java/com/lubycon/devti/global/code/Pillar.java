@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Pillar {
-  ROLE("직군", Arrays.asList("F", "B")),
+  ROLE("직군", Arrays.asList("V", "A")),
   SCALE("규모", Arrays.asList("S", "C")),
   INTEREST("관심사", Arrays.asList("P", "T")),
   PRIORITY("우선순위", Arrays.asList("W", "L")),
+  REFERENCE("참고정보", Arrays.asList("")),
   ;
 
   private final String pillar;
@@ -17,6 +18,6 @@ public enum Pillar {
     this.pillar = pillar;
     this.biasList = biasList;
   }
-  
+
 
 }
