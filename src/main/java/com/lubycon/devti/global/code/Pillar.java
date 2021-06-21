@@ -8,7 +8,7 @@ public enum Pillar {
   SCALE("규모", Arrays.asList("S", "C")),
   INTEREST("관심사", Arrays.asList("P", "T")),
   PRIORITY("우선순위", Arrays.asList("W", "L")),
-  REFERENCE("참고정보", Arrays.asList("")),
+  REFERENCE("참고정보", Arrays.asList("I")),
   ;
 
   private final String pillar;

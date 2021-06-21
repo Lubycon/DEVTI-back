@@ -12,7 +12,8 @@ INSERT INTO bias(pillar, bias, en_bias, kr_bias) VALUES
 ('INTEREST', 'P', 'Product', '상품'),
 ('INTEREST', 'T', 'Technology', '기술'),
 ('PRIORITY', 'W', 'Work', '업무'),
-('PRIORITY', 'L', 'Life', '개인시간');
+('PRIORITY', 'L', 'Life', '개인시간'),
+('REFERENCE', 'I', 'ETC', '기타');
 
 
 INSERT INTO question (created_at, updated_at, pillar, title, answer_type) VALUES

@@ -12,7 +12,7 @@ public enum BiasType implements DevtiEnumerable {
   T(5),
   W(6),
   L(7),
-  ETC(8),
+  I(8),
   ;
 
   private final int value;
