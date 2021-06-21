@@ -57,8 +57,8 @@ INSERT INTO question (created_at, updated_at, pillar, title, answer_type) VALUES
 (now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
 (now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
 (now(), now(), 'PRIORITY', 'Work vs Life', 'GAGE'),
-(now(), now(), 'REFERENCE', '희망하는 직무가 무엇이에요?', 'JOB'),
-(now(), now(), 'REFERENCE', '현재 해당 직무에서 근무하신 기간이 어떻게 되나요?', 'YEARS');
+(now(), now(), 'REFERENCE', '현재 해당 직무에서 근무하신 기간이 어떻게 되나요?', 'INFO'),
+(now(), now(), 'REFERENCE', '향후 희망하는 직무가 무엇이에요?', 'INFO');
 
 INSERT INTO preset (created_at, updated_at, question_id, sequence, label, bias, weight) VALUES
 (now(), now(), 1, 0, 'VVVVVV', 'V', 1),
