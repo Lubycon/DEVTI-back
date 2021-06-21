@@ -1,6 +1,7 @@
 package com.lubycon.devti.domain.devti.dto;
 
 import com.lubycon.devti.domain.bias.entity.Bias;
+import com.lubycon.devti.domain.review.entity.Review;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
