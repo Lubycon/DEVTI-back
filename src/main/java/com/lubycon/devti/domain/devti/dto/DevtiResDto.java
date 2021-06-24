@@ -1,6 +1,7 @@
 package com.lubycon.devti.domain.devti.dto;
 
 import com.lubycon.devti.domain.advertisement.entity.Advertisement;
+import com.lubycon.devti.domain.review.dto.ReviewResDto;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -23,11 +24,11 @@ public class DevtiResDto {
 
   @NotNull
   @ApiModelProperty(value = "DEVTI 총평", example = "당신은 블라블라해요 블라블라하면 블라블라해서 블라블라 할수있을거에요 블라블라~~")
-  private Review generalReview;
+  private ReviewResDto generalReview;
 
   @NotNull
   @ApiModelProperty(value = "Bias 결과 리스트 ")
-  private List<BiasResult> biasResults;
+  private List<BiasReviewResult> biasResults;
 
   @Nullable
   @ApiModelProperty(value = "학습, 채용공고")
@@ -35,8 +36,8 @@ public class DevtiResDto {
 
   @Builder
   public DevtiResDto(Long id, @NotNull String devti, @NotNull String devtiTitle,
-      @NotNull Review generalReview,
-      @NotNull List<BiasResult> biasResults,
+      @NotNull ReviewResDto generalReview,
+      @NotNull List<BiasReviewResult> biasResults,
       @Nullable List<Advertisement> advertisementList) {
     this.id = id;
     this.devti = devti;

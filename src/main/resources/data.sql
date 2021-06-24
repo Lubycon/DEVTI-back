@@ -12,7 +12,9 @@ INSERT INTO bias(pillar, bias, en_bias, kr_bias) VALUES
 ('INTEREST', 'P', 'Product', '상품'),
 ('INTEREST', 'T', 'Technology', '기술'),
 ('PRIORITY', 'W', 'Work', '업무'),
-('PRIORITY', 'L', 'Life', '개인시간');
+('PRIORITY', 'L', 'Life', '개인시간'),
+('REFERENCE', 'J', 'ETC', '기타'),
+('REFERENCE', 'Y', 'ETC', '기타');
 
 
 INSERT INTO question (created_at, updated_at, pillar, title, answer_type) VALUES
@@ -201,12 +203,41 @@ INSERT INTO preset (created_at, updated_at, question_id, sequence, label, bias, 
 (now(), now(), 40, 2, '', 'W', 0),
 (now(), now(), 40, 3, '', 'L', 0.5),
 (now(), now(), 40, 4, '', 'L', 1),
-(now(), now(), 41, 0, '프론트엔드', 'ETC', 0),
-(now(), now(), 41, 1, '백엔드', 'ETC', 0),
-(now(), now(), 41, 2, '기타', 'ETC', 0),
-(now(), now(), 42, 0, '0 ~ 1년', 'ETC', 0),
-(now(), now(), 42, 1, '1 ~ 3년', 'ETC', 0),
-(now(), now(), 42, 2, '4년 이상', 'ETC', 0);
+(now(), now(), 41, 0, '프론트엔드', 'J', 0),
+(now(), now(), 41, 1, '백엔드', 'J', 0),
+(now(), now(), 42, 0, '0 ~ 1년', 'Y', 0),
+(now(), now(), 42, 1, '1 ~ 3년', 'Y', 0),
+(now(), now(), 42, 2, '4년 이상', 'Y', 0);
+
+INSERT INTO review (review_type, headline, title, contents) VALUES
+('VSPL', '열정적인 꿈을 가진 당신은 야망가 VSPL', '당신은 VSPL', '열정적인 꿈을 가진 당신은 VSPL'),
+('VSPW', '열정적인 꿈을 가진 당신은 야망가 VSPW', '당신은 VSPW', '열정적인 꿈을 가진 당신은 VSPW'),
+('VSTL', '열정적인 꿈을 가진 당신은 야망가 VSTL', '당신은 VSTL', '열정적인 꿈을 가진 당신은 VSTL'),
+('VSTW', '열정적인 꿈을 가진 당신은 야망가 VSTW', '당신은 VSTW', '열정적인 꿈을 가진 당신은 VSTW'),
+('VCPL', '열정적인 꿈을 가진 당신은 야망가 VCPL', '당신은 VCPL', '열정적인 꿈을 가진 당신은 VCPL'),
+('VCPW', '열정적인 꿈을 가진 당신은 야망가 VCPW', '당신은 VCPW', '열정적인 꿈을 가진 당신은 VCPW'),
+('VCTL', '열정적인 꿈을 가진 당신은 야망가 VCTL', '당신은 VCTL', '열정적인 꿈을 가진 당신은 VCTL'),
+('VCTW', '열정적인 꿈을 가진 당신은 야망가 VCTW', '당신은 VCTW', '열정적인 꿈을 가진 당신은 VCTW'),
+('ASPL', '열정적인 꿈을 가진 당신은 야망가 ASPL', '당신은 ASPL', '열정적인 꿈을 가진 당신은 ASPL'),
+('ASPW', '열정적인 꿈을 가진 당신은 야망가 ASPW', '당신은 ASPW', '열정적인 꿈을 가진 당신은 ASPW'),
+('ASTL', '열정적인 꿈을 가진 당신은 야망가 ASTL', '당신은 ASTL', '열정적인 꿈을 가진 당신은 ASTL'),
+('ASTW', '열정적인 꿈을 가진 당신은 야망가 ASTW', '당신은 ASTW', '열정적인 꿈을 가진 당신은 ASTW'),
+('ACPL', '열정적인 꿈을 가진 당신은 야망가 ACPL', '당신은 ACPL', '열정적인 꿈을 가진 당신은 ACPL'),
+('ACPW', '열정적인 꿈을 가진 당신은 야망가 ACPW', '당신은 ACPW', '열정적인 꿈을 가진 당신은 ACPW'),
+('ACTL', '열정적인 꿈을 가진 당신은 야망가 ACTL', '당신은 ACTL', '열정적인 꿈을 가진 당신은 ACTL'),
+('ACTW', '열정적인 꿈을 가진 당신은 야망가 ACTW', '당신은 ACTW', '열정적인 꿈을 가진 당신은 ACTW'),
+('VF', '', '당신은 VF', '열정적인 꿈을 가진 당신은 VF'),
+('VB', '', '당신은 VB', '열정적인 꿈을 가진 당신은 VB'),
+('AF', '', '당신은 AF', '열정적인 꿈을 가진 당신은 AF'),
+('AB', '', '당신은 AB', '열정적인 꿈을 가진 당신은 AB'),
+('S1', '', '당신은 S1', '열정적인 꿈을 가진 당신은 S1'),
+('S2', '', '당신은 S2', '열정적인 꿈을 가진 당신은 S2'),
+('C1', '', '당신은 C1', '열정적인 꿈을 가진 당신은 C1'),
+('C2', '', '당신은 C2', '열정적인 꿈을 가진 당신은 C2'),
+('P', '', '당신은 P', '도전 정신이 강합니다! 무언가 확장하는 것을 좋아하는 당신, 자신의 분야 외에 다른 분야도 관심이 많습니다. 또한 새로운 서비스나 요즘 핫한 이슈를 항상 예의 주시하고 있군요. 어쩌면 당신은 핵인싸의 기질을 가지고 있을 수도 있겠군요.'),
+('T', '', '당신은 T', '한 가지에 꽂히면 몰두하는 스타일입니다. 이러한 성향이 자신의 커리어을 쌓을 때도 반영이 되곤 합니다. 깊은 연구 습득 능력과 항상 호기심에 가득한 당신은 열정적인 기술 중심의 성향을 가지고 있습니다.'),
+('W', '', '당신은 W', '일을 사랑하는 당신, 주어진 업무에 매사 최선을 다하고 싶어합니다. 목표설정에 따른 행동이 주체적인 사람입니다. 계획에 따라 성과가 최대치 일때 일에 대한 만족감을 얻고 능률이 오릅니다.'),
+('L', '', '당신은 L', '인생에서 자신을 더 많이 사랑하는 당신! 일 할땐 일 하고 쉴땐 후회없이 푹 쉬고 싶어합니다. 쉬는 시간엔 업무 관련된 모든일은 OFF합니다. 그래야 다음 스케줄을 효과적으로 소화할 수 있습니다!');
 
 INSERT INTO advertisement (created_at, updated_at, advertisement_ent_date, advertisement_start_date, advertisement_type, advertiser, image_url, title) VALUES
 (now(), now(), now(), now(), 'LECTURE', '김상혁', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.yna.co.kr%2Fview%2FAKR20200117042400030&psig=AOvVaw27KKp3K51zckObAoDLKGxh&ust=1622812930819000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKj2s7fH-_ACFQAAAAAdAAAAABAD', '광고테스트1'),

@@ -14,17 +14,17 @@ public class AnswerAttribute {
   private long id;
   private AnswerType answerType;
   private long sequence;
-  private BiasType biasType;
+  private BiasType bias;
   @Min(0)
   private float weight;
 
   @Builder
   public AnswerAttribute(long id, AnswerType answerType, long sequence,
-      BiasType biasType, @Min(0) float weight) {
+      BiasType bias, @Min(0) float weight) {
     this.id = id;
     this.answerType = answerType;
     this.sequence = sequence;
-    this.biasType = biasType;
+    this.bias = bias;
     this.weight = weight;
   }
 }

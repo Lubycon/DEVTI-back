@@ -19,16 +19,18 @@ public class DevtiAnalysisService {
   private final static float BIAS_CALIBRATION_VALUE = 0F;
   private final static float PILLAR_TOTAL_WEIGHT = 10F;
 
-  public Map<BiasType, Float> analysisAnswer(List<AnswerAttribute> answerAttributeList) {
+  public HashMap<BiasType, Float> analysisAnswer(List<AnswerAttribute> answerAttributeList) {
 
     HashMap<BiasType, Float> weightMap = initBiasWeightMap();
 
     for (AnswerAttribute answer : answerAttributeList) {
-      float newWeight = weightMap.get(answer.getBiasType()) + answer.getWeight();
-      weightMap.replace(answer.getBiasType(), newWeight);
+      if (!Pillar.REFERENCE.biasList.contains(answer.getBias())) {
+        float newWeight = weightMap.get(answer.getBias()) + answer.getWeight();
+        weightMap.replace(answer.getBias(), newWeight);
+      }
     }
 
-    return classifyDevtiByPillar(convertWeightToPercent(weightMap));
+    return convertWeightToPercent(weightMap);
   }
 
   public HashMap<BiasType, Float> initBiasWeightMap() {
@@ -47,22 +49,30 @@ public class DevtiAnalysisService {
     for (Map.Entry<BiasType, Float> biasWeight : weightMap.entrySet()) {
       weightMap.replace(biasWeight.getKey(), biasWeight.getValue() / PILLAR_TOTAL_WEIGHT * 100);
     }
+
+    log.info("{}", weightMap.toString());
     return weightMap;
   }
 
-  public Map<BiasType, Float> classifyDevtiByPillar(HashMap<BiasType, Float> biasResult) {
-    Map<BiasType, Float> resultMap = new LinkedHashMap<>();
+  public HashMap<BiasType, Float> classifyDevtiByPillar(HashMap<BiasType, Float> biasResult) {
+
+    HashMap<BiasType, Float> resultMap = new LinkedHashMap<>();
 
     for (Pillar pillar : Pillar.values()) {
-      Float firstValue = biasResult.get(BiasType.valueOf(pillar.biasList.get(0)));
-      Float secondValue = biasResult.get(BiasType.valueOf(Pillar.ROLE.biasList.get(1)));
 
-      //TODO: 5:5일경우
-      String key = firstValue > secondValue ? pillar.biasList.get(0) : pillar.biasList.get(1);
+      if (pillar.equals(Pillar.REFERENCE)) {
+        continue;
+      }
+      Float firstValue = biasResult.get(pillar.biasList.get(0));
+      Float secondValue = biasResult.get(pillar.biasList.get(1));
+
+      BiasType key = firstValue > secondValue ? pillar.biasList.get(0) : pillar.biasList.get(1);
       Float value = firstValue > secondValue ? firstValue : secondValue;
-      resultMap.put(BiasType.valueOf(key), value);
+      resultMap.put(key, value);
+
     }
 
     return resultMap;
   }
+
 }
