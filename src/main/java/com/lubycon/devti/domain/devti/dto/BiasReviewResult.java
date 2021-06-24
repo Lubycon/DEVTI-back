@@ -1,7 +1,7 @@
 package com.lubycon.devti.domain.devti.dto;
 
 import com.lubycon.devti.domain.bias.entity.Bias;
-import com.lubycon.devti.domain.review.entity.Review;
+import com.lubycon.devti.domain.review.dto.ReviewResDto;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class BiasResult {
+public class BiasReviewResult {
 
   @NotNull
   @ApiModelProperty(value = "Bias 정보")
@@ -21,15 +21,15 @@ public class BiasResult {
   @Min(0)
   @Max(100)
   @ApiModelProperty(value = "Bias percent", example = "10")
-  private long weight;
+  private Float weight;
 
   @NotNull
   @ApiModelProperty(value = "Bias 총평", example = "필러 총평")
-  private Review review;
+  private ReviewResDto review;
 
   @Builder
-  public BiasResult(@NotNull Bias bias, @NotNull long weight,
-      @NotNull Review review) {
+  public BiasReviewResult(@NotNull Bias bias, @NotNull Float weight,
+      @NotNull ReviewResDto review) {
     this.bias = bias;
     this.weight = weight;
     this.review = review;

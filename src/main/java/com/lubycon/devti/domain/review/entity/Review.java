@@ -25,6 +25,9 @@ public class Review {
   private Long id;
 
   @Column(length = 500)
+  private String headline;
+
+  @Column(length = 500)
   private String title;
 
   @Lob
@@ -33,4 +36,6 @@ public class Review {
 
   @Column(nullable = false)
   private String reviewType;
+
+
 }

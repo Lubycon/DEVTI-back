@@ -13,11 +13,9 @@ public class BiasService {
 
   private final BiasRepository biasRepository;
 
-  public Bias findByBias(BiasType biasType) {
-    return biasRepository.findByBias(biasType);
+  public List<Bias> findBiasListByBiasIsNotIn(List<BiasType> biasTypes) {
+
+    return biasRepository.findAllByBiasIsNotIn(biasTypes);
   }
 
-  public List<Bias> findAll() {
-    return biasRepository.findAll();
-  }
 }

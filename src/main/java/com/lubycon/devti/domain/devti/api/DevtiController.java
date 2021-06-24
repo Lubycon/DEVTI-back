@@ -24,9 +24,9 @@ public class DevtiController {
 
   @PostMapping
   @ApiOperation(value = "답변 저장하여 결과값 반환 받기")
-  public ResponseEntity<DevtiResDto> getDevtiByAnswer(
-      @RequestBody List<AnswerAttribute> answerAttributeList) {
-    return ResponseEntity.ok(devtiService.getMockResultResponse());
+  public ResponseEntity<DevtiResDto> getDevtiByAnswer(@RequestBody List<AnswerAttribute> answerAttributeList) {
+
+    return ResponseEntity.ok(devtiService.getDevtiByAnswer(answerAttributeList));
   }
 }
  
