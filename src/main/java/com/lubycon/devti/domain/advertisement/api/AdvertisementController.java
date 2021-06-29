@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Api(value = "Advertisement")
 public class AdvertisementController {
-
+  
   private final AdvertisementService advertisementService;
 
   @GetMapping

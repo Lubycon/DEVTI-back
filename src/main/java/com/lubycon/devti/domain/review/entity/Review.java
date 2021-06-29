@@ -24,9 +24,11 @@ public class Review {
   @Column(name = "survey_id")
   private Long id;
 
+  @Lob
   @Column(length = 500)
   private String headline;
 
+  @Lob
   @Column(length = 500)
   private String title;
 

@@ -1,6 +1,8 @@
 package com.lubycon.devti.domain.devti.service;
 
 import com.lubycon.devti.domain.answer.entity.AnswerAttribute;
+import com.lubycon.devti.domain.bias.entity.Bias;
+import com.lubycon.devti.domain.bias.service.BiasService;
 import com.lubycon.devti.global.code.BiasType;
 import com.lubycon.devti.global.code.Pillar;
 import java.util.HashMap;
@@ -17,9 +19,10 @@ import org.springframework.stereotype.Service;
 public class DevtiAnalysisService {
 
   private final static float BIAS_CALIBRATION_VALUE = 0F;
-  private final static float PILLAR_TOTAL_WEIGHT = 10F;
+  private final static Integer PILLAR_TOTAL_WEIGHT = 10;
+  private final BiasService biasService;
 
-  public HashMap<BiasType, Float> analysisAnswer(List<AnswerAttribute> answerAttributeList) {
+  public HashMap<BiasType, Integer> analysisAnswer(List<AnswerAttribute> answerAttributeList) {
 
     HashMap<BiasType, Float> weightMap = initBiasWeightMap();
 
@@ -35,39 +38,39 @@ public class DevtiAnalysisService {
 
   public HashMap<BiasType, Float> initBiasWeightMap() {
 
-    BiasType[] biasTypeArray = BiasType.values();
+    List<Bias> biasList = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList);
 
-    HashMap<BiasType, Float> weightMap = new HashMap<>(biasTypeArray.length);
-    for (BiasType biasType : biasTypeArray) {
-      weightMap.put(biasType, BIAS_CALIBRATION_VALUE);
+    HashMap<BiasType, Float> weightMap = new HashMap<>(biasList.size());
+    for (Bias bias : biasList) {
+      weightMap.put(bias.getBias(), BIAS_CALIBRATION_VALUE);
     }
 
     return weightMap;
   }
 
-  public HashMap<BiasType, Float> convertWeightToPercent(HashMap<BiasType, Float> weightMap) {
+  public HashMap<BiasType, Integer> convertWeightToPercent(HashMap<BiasType, Float> weightMap) {
+
+    HashMap<BiasType, Integer> result = new HashMap<>();
     for (Map.Entry<BiasType, Float> biasWeight : weightMap.entrySet()) {
-      weightMap.replace(biasWeight.getKey(), biasWeight.getValue() / PILLAR_TOTAL_WEIGHT * 100);
+      result.put(biasWeight.getKey(), Math.round(biasWeight.getValue() / PILLAR_TOTAL_WEIGHT * 100));
     }
-
-    log.info("{}", weightMap.toString());
-    return weightMap;
+    return result;
   }
 
-  public HashMap<BiasType, Float> classifyDevtiByPillar(HashMap<BiasType, Float> biasResult) {
+  public HashMap<BiasType, Integer> classifyDevtiByPillar(HashMap<BiasType, Integer> biasResult) {
 
-    HashMap<BiasType, Float> resultMap = new LinkedHashMap<>();
+    HashMap<BiasType, Integer> resultMap = new LinkedHashMap<>();
 
     for (Pillar pillar : Pillar.values()) {
 
       if (pillar.equals(Pillar.REFERENCE)) {
         continue;
       }
-      Float firstValue = biasResult.get(pillar.biasList.get(0));
-      Float secondValue = biasResult.get(pillar.biasList.get(1));
+      Integer firstValue = biasResult.get(pillar.biasList.get(0));
+      Integer secondValue = biasResult.get(pillar.biasList.get(1));
 
       BiasType key = firstValue > secondValue ? pillar.biasList.get(0) : pillar.biasList.get(1);
-      Float value = firstValue > secondValue ? firstValue : secondValue;
+      Integer value = firstValue > secondValue ? firstValue : secondValue;
       resultMap.put(key, value);
 
     }
