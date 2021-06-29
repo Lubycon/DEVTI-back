@@ -8,6 +8,7 @@ import com.lubycon.devti.domain.bias.entity.Bias;
 import com.lubycon.devti.domain.bias.service.BiasService;
 import com.lubycon.devti.domain.devti.dao.DevtiRepository;
 import com.lubycon.devti.domain.devti.dto.BiasReviewResult;
+import com.lubycon.devti.domain.devti.dto.DevtiReqDto;
 import com.lubycon.devti.domain.devti.dto.DevtiResDto;
 import com.lubycon.devti.domain.devti.entity.Devti;
 import com.lubycon.devti.domain.review.dto.ReviewResDto;
@@ -43,13 +44,22 @@ public class DevtiService {
   private final String DESIRED_JOB_F = "F";
   private final String DESIRED_JOB_B = "B";
 
-
-  public DevtiResDto getDevtiByAnswer(List<AnswerAttribute> answerAttributeList) {
-
+  public DevtiReqDto analysisAndCreateDevti(List<AnswerAttribute> answerAttributeList) {
     Answer answer = answerService.createAnswer(answerAttributeList);
-    HashMap<BiasType, Float> biasResult = devtiAnalysisService.analysisAnswer(answerAttributeList);
-    HashMap<BiasType, Float> winBiasResult = devtiAnalysisService.classifyDevtiByPillar(biasResult);
+    HashMap<BiasType, Integer> biasResult = devtiAnalysisService.analysisAnswer(answerAttributeList);
+    HashMap<BiasType, Integer> winBiasResult = devtiAnalysisService.classifyDevtiByPillar(biasResult);
     String job = answerAttributeList.get(40).getSequence() == 0 ? DESIRED_JOB_F : DESIRED_JOB_B;
+    createDevti(answer, winBiasResult, biasResult);
+    return DevtiReqDto.builder()
+        .job(job)
+        .result(biasResult.toString())
+        .build();
+  }
+
+  public DevtiResDto getDevtiByAnswer(HashMap<BiasType, Integer> biasResult, String job) {
+
+    HashMap<BiasType, Integer> winBiasResult = devtiAnalysisService.classifyDevtiByPillar(biasResult);
+    String devtiString = getDevtiString(winBiasResult);
 
     Map<BiasType, String> reviewTypeMap = new HashMap<>();
     Entry<BiasType, String> roleReivewType = getRolePillarReviewType(winBiasResult, job);
@@ -57,60 +67,59 @@ public class DevtiService {
     reviewTypeMap.put(roleReivewType.getKey(), roleReivewType.getValue());
     reviewTypeMap.put(scalePillarReviewType.getKey(), scalePillarReviewType.getValue());
 
-    Devti devti = createDevti(answer, winBiasResult);
-    Review generalReview = reviewService.findByReviewType(devti.getDevti());
+    Review generalReview = reviewService.findByReviewType(devtiString);
 
     return DevtiResDto.builder()
-        .devti(devti.getDevti())
+        .devti(devtiString)
         .devtiTitle(generalReview.getHeadline())
         .generalReview(new ReviewResDto().toResDto(generalReview))
-        .biasResults(getBiasResults(devti.getDevti(), biasResult, reviewTypeMap))
+        .biasResults(getBiasResults(devtiString, biasResult, reviewTypeMap))
         .advertisementList(advertisementService.findAll())
         .build();
   }
 
-  public Entry<BiasType, String> getRolePillarReviewType(HashMap<BiasType, Float> winBiasResult, String job) {
+  public Entry<BiasType, String> getRolePillarReviewType(HashMap<BiasType, Integer> winBiasResult, String job) {
 
-    Map.Entry<BiasType, Float> rolePillarBias = winBiasResult.entrySet().stream()
+    Map.Entry<BiasType, Integer> rolePillarBias = winBiasResult.entrySet().stream()
         .filter(bias -> Pillar.ROLE.biasList.contains(bias.getKey())).findFirst()
-        .orElse(new AbstractMap.SimpleEntry<>(BiasType.V, 75F));
+        .orElse(new AbstractMap.SimpleEntry<>(BiasType.V, 75));
 
     return new AbstractMap.SimpleEntry<>(rolePillarBias.getKey(), rolePillarBias.getKey() + job);
   }
 
-  public Entry<BiasType, String> getScalePillarReviewType(HashMap<BiasType, Float> winBiasResult) {
+  public Entry<BiasType, String> getScalePillarReviewType(HashMap<BiasType, Integer> winBiasResult) {
 
-    Map.Entry<BiasType, Float> scalePillarBias = winBiasResult.entrySet().stream()
+    Map.Entry<BiasType, Integer> scalePillarBias = winBiasResult.entrySet().stream()
         .filter(bias -> Pillar.SCALE.biasList.contains(bias.getKey())).findFirst()
-        .orElse(new AbstractMap.SimpleEntry<>(BiasType.S, 75F));
+        .orElse(new AbstractMap.SimpleEntry<>(BiasType.S, 75));
 
-    Float weight = scalePillarBias.getValue();
+    Integer weight = scalePillarBias.getValue();
     String weightType = weight <= SCALE_PILLAR_REVIEW_TYPE_THRESHOLD ? SCALE_PILLAR_REVIEW_TYPE_1 : SCALE_PILLAR_REVIEW_TYPE_2;
 
     return new AbstractMap.SimpleEntry<>(scalePillarBias.getKey(), scalePillarBias.getKey() + weightType);
   }
 
-  public String getDevtiString(HashMap<BiasType, Float> biasResult) {
+  public String getDevtiString(HashMap<BiasType, Integer> biasResult) {
 
     String devtiString = "";
-    for (Map.Entry<BiasType, Float> biasMap : biasResult.entrySet()) {
+    for (Map.Entry<BiasType, Integer> biasMap : biasResult.entrySet()) {
       devtiString += biasMap.getKey().toString();
     }
 
     return devtiString;
   }
 
-  public Devti createDevti(Answer answer, HashMap<BiasType, Float> biasResult) {
+  public Devti createDevti(Answer answer, HashMap<BiasType, Integer> winBiasResult, HashMap<BiasType, Integer> biasResult) {
     Devti devti = Devti.builder()
         .answer(answer)
-        .devti(getDevtiString(biasResult))
+        .devti(getDevtiString(winBiasResult))
         .devtiResult(biasResult.toString())
         .build();
 
     return devtiRepository.save(devti);
   }
 
-  public List<BiasReviewResult> getBiasResults(String devti, HashMap<BiasType, Float> biasResult,
+  public List<BiasReviewResult> getBiasResults(String devti, HashMap<BiasType, Integer> biasResult,
       Map<BiasType, String> reviewTypeMap) {
 
     List<Bias> biasList = biasService.findBiasListByBiasIsNotIn(Pillar.REFERENCE.biasList);

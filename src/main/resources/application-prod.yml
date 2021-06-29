@@ -1,6 +1,7 @@
 server:
   port: 8090
 
+spring:
   jpa:
     generate-ddl: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

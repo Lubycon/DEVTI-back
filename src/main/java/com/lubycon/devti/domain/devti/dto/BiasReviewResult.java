@@ -21,14 +21,14 @@ public class BiasReviewResult {
   @Min(0)
   @Max(100)
   @ApiModelProperty(value = "Bias percent", example = "10")
-  private Float weight;
+  private Integer weight;
 
   @NotNull
   @ApiModelProperty(value = "Bias 총평", example = "필러 총평")
   private ReviewResDto review;
 
   @Builder
-  public BiasReviewResult(@NotNull Bias bias, @NotNull Float weight,
+  public BiasReviewResult(@NotNull Bias bias, @NotNull Integer weight,
       @NotNull ReviewResDto review) {
     this.bias = bias;
     this.weight = weight;

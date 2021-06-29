@@ -12,8 +12,6 @@ import lombok.Getter;
 @Getter
 public class DevtiResDto {
 
-  private Long id;
-
   @NotNull
   @ApiModelProperty(value = "DEVTI 16타입", example = "VPSW")
   private String devti;
@@ -35,11 +33,10 @@ public class DevtiResDto {
   private List<Advertisement> advertisementList;
 
   @Builder
-  public DevtiResDto(Long id, @NotNull String devti, @NotNull String devtiTitle,
+  public DevtiResDto(@NotNull String devti, @NotNull String devtiTitle,
       @NotNull ReviewResDto generalReview,
       @NotNull List<BiasReviewResult> biasResults,
       @Nullable List<Advertisement> advertisementList) {
-    this.id = id;
     this.devti = devti;
     this.devtiTitle = devtiTitle;
     this.generalReview = generalReview;
